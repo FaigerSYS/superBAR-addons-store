@@ -13,7 +13,7 @@ $onStart = function() {
 	$string = '%BLANK%';
 	
 	# There you can write any data you want to use in $onExecute (one argument)
-	$this->setVariable(null);
+	#$this->createVariable = null;
 	# You can also write there any class/plugin needed to addon works
 	
 	# Then retrun string
