@@ -7,9 +7,13 @@
 # You can import another classes
 #use pocketmine\Server;
 
+# Choose addon API version
+$API = 2;
+# Can be array to add multiple API support
+
 # Fuction that runs once when addon loading
 $onStart = function(int $currentAPI = 1) {
-	# $currentAPI - current API version for the addon
+	# $currentAPI - current API version that uses for addon. Can be used to create backward compatibility with older APIs versions
 	
 	# String to replace in HUD format
 	$string = '%BLANK%';
