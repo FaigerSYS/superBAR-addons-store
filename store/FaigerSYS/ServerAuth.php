@@ -11,7 +11,7 @@ $API = 2;
 $onStart = function(int $currentAPI = 1) {
 	if ($currentAPI === 1) {
 		# https://github.com/FaigerSYS/superBAR-addons-store/wiki/Some-complications
-		Server::getInstance()->getLogger()->warning('Addon ... doesn\'t supports Addon API v1. Please update your superBAR to latest version!');
+		Server::getInstance()->getLogger()->warning('Addon for ServerAuth doesn\'t supports Addon API v1. Please update your superBAR to latest version!');
 		return null;
 	}
 	
