@@ -1,0 +1,52 @@
+<?php
+# # # # # # # # # # # # # # #
+# Author: FaigerSYS
+# Descriprion: Adds Cash support (%CASH%)
+# # # # # # # # # # # # # # #
+
+use pocketmine\Server;
+
+# There we can use multiple APIs
+$API = [1, 2];
+# BUT, you must also provide support of them in $onStart and $onExecute
+
+$onStart = function(int $currentAPI = 1) {
+	$string = '%CASH%';
+	
+	$cash = Server::getInstance()->getPluginManager()->getPlugin('Cash');
+	if ($cash && $cash->isEnabled()) {
+		# Needed plugin founded, so we can enable addon
+		$canEnable = true;
+		$unloadReason = null;
+		# Putting into valiable plugin to use in $onExecute
+		$this->setVariable($cash);
+	} else {
+		# Else, we can't enable addon because of it's useless without needed plugin
+		$canEnable = false;
+		$unloadReason = 'Cash not founded!';
+	}
+	
+	# We can add multiple API support
+	if ($currentAPI === 1) {
+		# API v1 supports only "string-for-format" return. So we can't disable addon
+		# Also, to set variable uses this combination
+		$this->createVariable = $cash;
+		return $string;
+	} else {
+		$this->setVariable($cash);
+		return [$string, $canEnable, $unloadReason];
+	}
+};
+
+$onExecute = function($player, $var, int $currentAPI = 1) {
+	# Checking for plugin if API ver. = 1
+	if ($currentAPI === 1 && !$var) {
+		$out = 'NoPlugin';
+		# API v1 supports only output return
+		return $out;
+	} else {
+		$out = $var->getHUD()->$money->get($player);
+		$out = ($out !== false ? $out : '$money');
+		return [$out, true];
+	}
+};
